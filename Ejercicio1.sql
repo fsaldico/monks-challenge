@@ -1,5 +1,4 @@
 /* EJERCICIO 1: INTEGRIDAD DE DATOS */
--- Creación de tabla limpia con filtros aplicados
 CREATE OR REPLACE TABLE `mm-tse-latam-interviews.challange_florencia.VENTAS_LIMPIA` AS
 SELECT 
   -- Filtro 1: Generar UUID para IDs nulos
@@ -8,7 +7,7 @@ SELECT
     ELSE CAST(ID_VENTA AS STRING)
   END AS ID_VENTA,
   
-  -- Filtro 2: Asignar fecha por defecto (2022-01-01) si es nula
+  -- Filtro 2: Asignar fecha por defecto si es nula
   DATE(COALESCE(CREATION_DATE, '2022-01-01')) AS CREATION_DATE,
   
   -- Filtro 3: Normalizar países a códigos estándar
@@ -37,12 +36,31 @@ WHERE
   -- Filtro 8: Excluir cantidades cero o negativas
   AND ABS(CANTIDAD) > 0;
 
--- Verificación de calidad (QA)
+-- =============================================================================
+-- VERIFICACIÓN DE CALIDAD POST-LIMPIEZA
+-- =============================================================================
+
+-- Verificación 1: Conteo de registros limpios
 SELECT 
-  COUNT(*) AS total_registros,
+  'VENTAS_LIMPIA' AS tabla,
+  COUNT(*) AS total_registros
+FROM `mm-tse-latam-interviews.challange_florencia.VENTAS_LIMPIA`;
+
+-- Verificación 2: Rango de fechas válido
+SELECT 
   MIN(CREATION_DATE) AS fecha_minima,
-  MAX(CREATION_DATE) AS fecha_maxima,
-  COUNT(DISTINCT PAIS) AS paises_unicos,
-  COUNTIF(CANTIDAD <= 0) AS cantidades_invalidas,
-  COUNTIF(ID_VENTA IS NULL) AS ids_nulos
+  MAX(CREATION_DATE) AS fecha_maxima
+FROM `mm-tse-latam-interviews.challange_florencia.VENTAS_LIMPIA`;
+
+-- Verificación 3: Países válidos
+SELECT 
+  PAIS,
+  COUNT(*) AS conteo
+FROM `mm-tse-latam-interviews.challange_florencia.VENTAS_LIMPIA`
+GROUP BY PAIS;
+
+-- Verificación 4: Valores numéricos válidos
+SELECT 
+  COUNTIF(PRECIO_MONEDA_LOCAL <= 0) AS precios_invalidos,
+  COUNTIF(CANTIDAD <= 0) AS cantidades_invalidas
 FROM `mm-tse-latam-interviews.challange_florencia.VENTAS_LIMPIA`;
