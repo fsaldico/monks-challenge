@@ -13,14 +13,11 @@ SELECT
   END AS PAIS,
   CAST(CANTIDAD AS INT64) AS CANTIDAD,
   CAST(PRECIO_MONEDA_LOCAL AS FLOAT64) AS PRECIO_MONEDA_LOCAL,
-  PARSE_DATE('%Y-%m-%d', FECHA_CREACION) AS CREATION_DATE
+  PARSE_DATE('%Y-%m-%d', fecha_creacion) AS CREATION_DATE
 FROM `mm-tse-latam-interviews.challange_florencia.ventas_2`
 WHERE
-  -- Filtro de fechas válidas
-  FECHA_CREACION BETWEEN '2022-01-01' AND '2022-03-31'
-  -- Filtro de países válidos
+  fecha_creacion BETWEEN '2022-01-01' AND '2022-03-31'
   AND UPPER(PAIS) IN ('ARGENTINA', 'BRASIL', 'MEXICO', 'ARG', 'BRA', 'MEX')
-  -- Filtro de valores numéricos válidos
   AND CAST(CANTIDAD AS INT64) > 0
   AND CAST(PRECIO_MONEDA_LOCAL AS FLOAT64) > 0;
 
