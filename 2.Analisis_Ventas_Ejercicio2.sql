@@ -1,7 +1,6 @@
 /* EJERCICIO 2: ANÁLISIS DE VENTAS */
 
--- [REQUERIMIENTO PRINCIPAL: Ranking de productos por ingresos USD]
--- 1. Normalización de tipos de cambio (base para conversión)
+-- 1. Normalización de tipos de cambio
 CREATE OR REPLACE TABLE `mm-tse-latam-interviews.challange_florencia.tdc_normalizado` AS
 SELECT
   DATE(FECHA_TDC) AS FECHA_TDC,
@@ -14,7 +13,6 @@ SELECT
   TDC
 FROM `mm-tse-latam-interviews.challange_florencia.tdc_2`;
 
--- [BASE PARA TODOS LOS ANÁLISIS]
 -- 2. Cálculo de ingresos mensuales en USD
 CREATE OR REPLACE TABLE `mm-tse-latam-interviews.challange_florencia.ingresos_mensuales` AS
 SELECT
@@ -29,7 +27,6 @@ JOIN `mm-tse-latam-interviews.challange_florencia.tdc_normalizado` t
   ON v.PAIS = t.PAIS AND v.CREATION_DATE = t.FECHA_TDC
 GROUP BY 1,2,3;
 
--- [REQUERIMIENTO PRINCIPAL: Ranking de productos]
 -- 3. Ranking mensual de productos
 CREATE OR REPLACE TABLE `mm-tse-latam-interviews.challange_florencia.ranking_mensual` AS
 SELECT
@@ -40,7 +37,6 @@ SELECT
   RANK() OVER (PARTITION BY mes, PAIS ORDER BY ingreso_usd DESC) AS ranking
 FROM `mm-tse-latam-interviews.challange_florencia.ingresos_mensuales`;
 
--- [CONSIGNA PREGUNTA 1: Productos con ventas estables]
 -- 4. Productos estables (coeficiente de variación)
 CREATE OR REPLACE TABLE `mm-tse-latam-interviews.challange_florencia.productos_estables` AS
 SELECT 
@@ -49,9 +45,8 @@ SELECT
   (STDDEV(ingreso_usd) / AVG(ingreso_usd)) * 100 AS coef_variacion
 FROM `mm-tse-latam-interviews.challange_florencia.ingresos_mensuales`
 GROUP BY 1,2
-HAVING COUNT(DISTINCT mes) >= 2;  -- Solo productos con datos en ≥2 meses
+HAVING COUNT(DISTINCT mes) >= 2;
 
--- [CONSIGNA PREGUNTA 2: Diferencias entre países]
 -- 5. Productos con diferencias entre países
 CREATE OR REPLACE TABLE `mm-tse-latam-interviews.challange_florencia.productos_diferencias` AS
 WITH ingresos_por_pais AS (
@@ -67,7 +62,7 @@ SELECT
   (MAX(ingreso_total_usd) - MIN(ingreso_total_usd)) / AVG(ingreso_total_usd) AS diff_relativa
 FROM ingresos_por_pais
 GROUP BY 1
-HAVING COUNT(DISTINCT PAIS) >= 2;  -- Solo productos en ≥2 países
+HAVING COUNT(DISTINCT PAIS) >= 2;
 
 -- =============================================================================
 -- RESPUESTAS REQUERIDAS
