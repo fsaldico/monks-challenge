@@ -1,10 +1,4 @@
 /* CONSULTA PARA VISUALIZACIÓN DE RESULTADOS CLAVE */
-/*
-RELACIÓN CON EJERCICIO 2:
-  07: REQUERIMIENTO PRINCIPAL (Ranking de productos)
-  08: RESPUESTA PREGUNTA 1 (Productos estables)
-  09: RESPUESTA PREGUNTA 2 (Diferencias entre países)
-*/
 SELECT 
   metrica,
   valor_obtenido,
