@@ -1,9 +1,6 @@
 /* SCRIPT DE VALIDACIÓN TÉCNICA: VERIFICA CALIDAD DE DATOS Y RESULTADOS */
 CREATE OR REPLACE TABLE `mm-tse-latam-interviews.challange_florencia.Resultados_Verificacion` AS
 WITH 
--- =============================================================================
--- VERIFICACIONES EJERCICIO 1: LIMPIEZA
--- =============================================================================
 verif_ej1 AS (
   SELECT '01_total_registros' AS id_metric, CAST(COUNT(*) AS STRING) AS valor_obtenido 
   FROM `mm-tse-latam-interviews.challange_florencia.VENTAS_LIMPIA`
@@ -30,24 +27,18 @@ verif_ej1 AS (
   FROM `mm-tse-latam-interviews.challange_florencia.VENTAS_LIMPIA`
 ),
 
--- =============================================================================
--- VERIFICACIONES EJERCICIO 2: ANÁLISIS
--- =============================================================================
 verif_ej2 AS (
-  -- [VERIFICACIÓN BASE: Ingresos mensuales]
   SELECT '06_total_ingresos_usd', CAST(ROUND(SUM(ingreso_usd), 2) AS STRING) 
   FROM `mm-tse-latam-interviews.challange_florencia.ingresos_mensuales`
   
   UNION ALL
   
-  -- [VERIFICACIÓN REQUERIMIENTO PRINCIPAL: Ranking]
   SELECT '07_productos_lideres', CAST(COUNT(*) AS STRING) 
   FROM `mm-tse-latam-interviews.challange_florencia.ranking_mensual` 
-  WHERE ranking = 1  -- Debe haber 9 (3 meses x 3 países)
+  WHERE ranking = 1
   
   UNION ALL
   
-  -- [VERIFICACIÓN PREGUNTA 1: Productos estables]
   SELECT '08_estabilidad_count', CAST(COUNT(DISTINCT PAIS) AS STRING) 
   FROM `mm-tse-latam-interviews.challange_florencia.productos_estables` p1
   WHERE coef_variacion = (
@@ -58,7 +49,6 @@ verif_ej2 AS (
   
   UNION ALL
   
-  -- [VERIFICACIÓN PREGUNTA 2: Diferencias entre países]
   SELECT '09_max_diferencia', CAST(ROUND(MAX(diff_relativa)*100, 2) AS STRING) 
   FROM `mm-tse-latam-interviews.challange_florencia.productos_diferencias`
 )
