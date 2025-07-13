@@ -1,6 +1,7 @@
 /* EJERCICIO 1: LIMPIEZA DE DATOS */
 -- Creación de la tabla VENTAS_LIMPIA con datos depurados y normalizados
 CREATE OR REPLACE TABLE `mm-tse-latam-interviews.challange_florencia.VENTAS_LIMPIA` AS
+
 SELECT 
   -- Generar UUID para IDs nulos, convertir a STRING
   CASE 
