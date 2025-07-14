@@ -9,6 +9,7 @@
 🔗 Acceder al repositorio
 
 📊 Resultados Clave
+
 Tabla 1. Comparación Global de Productos
 Producto	Unidades	Ingresos (USD)	Participación	Diferencia con Líder (Ventas)	Diferencia con Líder (Ingresos)
 Piluso multix	6,541	$98,822.70	20.47%	0.90%	-78.05%
