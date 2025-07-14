@@ -29,6 +29,7 @@ País	Coeficiente de Variación
 Argentina	43.77 (Más estable)
 México	51.72
 Brasil	53.03
+
 📌 Respuestas a las Preguntas del Ejercicio 2
 El archivo scripts/3.Resultados_preguntas.md contiene:
 
