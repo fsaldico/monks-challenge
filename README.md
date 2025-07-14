@@ -7,7 +7,7 @@ Análisis de datos de ventas utilizando:
 - Looker Studio para visualización  
 
 [![Licencia](https://img.shields.io/badge/Licencia-MIT-blue.svg)](https://opensource.org/licenses/MIT)  
-[![GitHub](https://img.shields.io/badge/GitHub-Repositorio-black)](https://github.com/)  
+[![GitHub](https://img.shields.io/badge/GitHub-Repositorio-black)](https://github.com/)   
 
 ## 🔧 Detalle Técnico del Pipeline  
 
