@@ -35,7 +35,7 @@ Brasil	53.03
 El archivo scripts/3.Resultados_preguntas.md contiene:
 
 Pregunta 1: Productos más estables por país
-markdown
+
 ## 📈 Análisis de Estabilidad por País
 
 | País      | Producto más estable | Coeficiente de Variación |
