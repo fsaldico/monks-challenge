@@ -1,4 +1,4 @@
-# 🧥 Análisis de Ventas 
+# 🧥 Análisis de Ventas Mayorista de Ropa
 **Primer Trimestre 2022 - Argentina, Brasil y México**  
 
 [![Licencia MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
