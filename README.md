@@ -5,113 +5,65 @@
 ![Google BigQuery](https://img.shields.io/badge/Google%20BigQuery-4285F4?logo=googlecloud&logoColor=white)
 ![SQL](https://img.shields.io/badge/SQL-003B57?logo=postgresql&logoColor=white)
 
-Repositorio con la solución completa para el challenge de análisis de ventas minoristas. Contiene scripts SQL para limpieza de datos, análisis comercial y validación técnica.
-
-## 📁 Estructura del Repositorio
-Archivo	Descripción
-Limpieza_Datos_Ejercicio1.sql	Limpieza de datos y creación de tabla depurada
-Analisis_Ventas_Ejercicio2.sql	Análisis de ventas, ranking e insights
-Verificacion_Resultados.sql	Validación técnica de resultados
-Consulta_Resultados.sql	Consulta para visualizar resultados de validación
-📋 Flujo de Trabajo
-
-
-
-
-🚀 Instalación y Ejecución
-Prerrequisitos:
-• Acceso a Google BigQuery
-• Permisos en el proyecto: mm-tse-latam-interviews
-• Dataset: challange_florencia
-
-Ejecución Paso a Paso:
-1.Limpieza de datos:
--- Ejecutar en BigQuery
-[CONTENIDO DE Limpieza_Datos_Ejercicio1.sql]
-
-2.Análisis de ventas:
--- Ejecutar en BigQuery
-[CONTENIDO DE Analisis_Ventas_Ejercicio2.sql]
-
-3.Validación técnica:
--- Ejecutar en BigQuery
-[CONTENIDO DE Verificacion_Resultados.sql]
-
-4.Verificar resultados:
--- Ejecutar en BigQuery
-[CONTENIDO DE Consulta_Resultados.sql]
+📌 Estructura del Repositorio (GitHub)
+🔗 Acceder al repositorio
 
 📊 Resultados Clave
-Hallazgos Principales:
+Tabla 1. Comparación Global de Productos
+Producto	Unidades	Ingresos (USD)	Participación	Diferencia con Líder (Ventas)	Diferencia con Líder (Ingresos)
+Piluso multix	6,541	$98,822.70	20.47%	0.90%	-78.05%
+Pack x 3 - Medias infantiles	6,482	$32,143.89	20.29%	1.77%	-92.86%
+Zapatos GTV	6,425	$450,417.20	20.11%	0.00% (Líder en ingresos)	0.00%
+Blazer fixed	6,359	$321,234.42	19.90%	2.78%	-28.68%
+Remera unisex	6,143	$155,815.12	19.23%	6.08%	-65.41%
+Total unidades vendidas: 31,950
+Total ingresos globales: $1,058,433.33
 
-1.Producto líder: Zapatos GTV (#1 en los tres países durante enero y febrero)
-2.Productos más estables:
-Argentina: Blazer fixed (CV: 0.20%)
-Brasil: Blazer fixed (CV: 8.29%)
-México: Remera unisex (CV: 6.49%)
-3.Mayor variación geográfica: Remera unisex (11.54% de diferencia)
+Tabla 2. Distribución de Ingresos por País
+País	Ingresos USD	% del Total
+México	$356,441.78	33.68%
+Argentina	$353,351.74	33.38%
+Brasil	$348,639.79	32.94%
+Tabla 3. Estabilidad de Mercados
+País	Coeficiente de Variación
+Argentina	43.77 (Más estable)
+México	51.72
+Brasil	53.03
+📌 Respuestas a las Preguntas del Ejercicio 2
+El archivo scripts/3.Resultados_preguntas.md contiene:
 
-Métricas de Validación
-Métrica	               Valor Obtenido	          Estado
-Registros limpios	     5,754	                      ✅
-Fechas válidas	       2022-01-01 a 2022-03-31	    ✅
-Ingresos totales USD	 > 1,240,000	                ✅
-Máxima diferencia	11.54%	                          ✅
+Pregunta 1: Productos más estables por país
+markdown
+## 📈 Análisis de Estabilidad por País
 
-📈 Visualización de Resultados
-Ejecutar Consulta_Resultados.sql para obtener:
+| País      | Producto más estable | Coeficiente de Variación |
+|-----------|----------------------|--------------------------|
+| Argentina | Blazer fixed         | 0.20%                    |
+| Brasil    | Blazer fixed         | 8.29%                    |
+| México    | Remera unisex        | 6.49%                    |
 
-sql
-SELECT * 
-FROM `mm-tse-latam-interviews.challange_florencia.Resultados_Verificacion`
-ORDER BY id_metric;
+**Conclusión**:  
+El Blazer fixed muestra la mayor estabilidad, especialmente en Argentina con apenas 0.2% de variación mensual.
+Pregunta 2: Diferencias entre países
+markdown
+## 🌎 Diferencias Geográficas en Consumo
 
-https://via.placeholder.com/600x300?text=Tabla+de+Validaci%25C3%25B3n+Completa
+| Producto      | Diferencia Relativa | Ingreso Total USD | Distribución por País               |
+|---------------|---------------------|------------------|-------------------------------------|
+| Remera unisex | 11.54%              | $155,815.12      | ARG: $48,004.73 • MEX: $53,810.03 • BRA: $54,000.36 |
 
-📌 Estructura de Datos
-Tabla Principal: VENTAS_LIMPIA
-sql
-VENTAS_LIMPIA (
-  ID_VENTA STRING,
-  CREATION_DATE DATE,
-  PAIS STRING,           -- Valores: ARG, BRA, MEX
-  ID_PRODUCTO STRING,
-  PRECIO_MONEDA_LOCAL FLOAT64,
-  CANTIDAD INT64         -- Siempre > 0
-)
-Tablas Analíticas
-sql
-ranking_mensual (
-  mes INT64,
-  PAIS STRING,
-  nombre_producto STRING,
-  ingreso_usd FLOAT64,
-  ranking INT64
-)
+**Hallazgo clave**:  
+Brasil consume un 11.54% más que Argentina en Remera unisex, mostrando las mayores diferencias regionales.
+📊 Dashboard Interactivo
+🔗 Acceder al Dashboard en Looker Studio
 
-productos_estables (
-  PAIS STRING,
-  nombre_producto STRING,
-  coef_variacion FLOAT64
-)
+📬 Contacto
+✉️ fsaldico@gmail.com
+🔗 Repositorio GitHub
 
-🤝 Contribución
-Haz un fork del proyecto
+Nota: Los scripts SQL de análisis se encuentran en:
 
-Crea una rama (git checkout -b feature/nueva-funcionalidad)
+1.Limpieza_Datos_Ejercicio1.sql
 
-Realiza tus cambios
+2.Analisis_Ventas_Ejercicio2.sql
 
-Haz commit (git commit -m 'Añade nueva funcionalidad')
-
-Haz push a la rama (git push origin feature/nueva-funcionalidad)
-
-Abre un Pull Request
-
-📄 Licencia
-Este proyecto está bajo la licencia MIT.
-
-✉️ Contacto
-Florencia Saldico
-fsaldico@example.com
-LinkedIn
